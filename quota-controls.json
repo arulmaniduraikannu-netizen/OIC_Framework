@@ -1,0 +1,173 @@
+[
+  {
+    "tag": "A",
+    "text": "Edit",
+    "title": "Edit this analysis",
+    "aria": null,
+    "href": "javascript:void()",
+    "onclick": "ModifyReport('saw.dll?Answers&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&Folder=%2fshared%2fCustom%2fSILVUS&LocItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota'); return false",
+    "class": ""
+  },
+  {
+    "tag": "A",
+    "text": "Refresh",
+    "title": "Refresh the results of the current analysis",
+    "aria": null,
+    "href": "javascript:void(0)",
+    "onclick": "javascript:HereLink('o:portalgo~r:report','Refresh'); saw.stopEvent(saw.getEvent(event)); return false;",
+    "class": ""
+  },
+  {
+    "tag": "A",
+    "text": "Print",
+    "title": "Print in different format",
+    "aria": null,
+    "href": "javascript:void(null)",
+    "onclick": "return NQWPopupMenu(event,'idPrintLinksMenuo:portalgo~r:report')",
+    "class": ""
+  },
+  {
+    "tag": "A",
+    "text": "Printable PDF",
+    "title": "",
+    "aria": null,
+    "href": "javascript:void(null)",
+    "onclick": "NQWClearActiveMenu();saw.printAnalysis('saw.dll?Go&ViewID=o%3aportalgo%7er%3areport&SearchID=fht9ci78n2ovq2hlu08s129o6u&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&Style=Alta&ViewState=4avjd0pbrm0uvof3170gdba0ja&viewName=compoundView%211', 'pdf', event, 'o:portalgo~r:report');return false;",
+    "class": "masterMenuItem NQWMenuItem NQWMenuItemWIconMixin"
+  },
+  {
+    "tag": "A",
+    "text": "Printable HTML",
+    "title": "",
+    "aria": null,
+    "href": "javascript:void(null)",
+    "onclick": "NQWClearActiveMenu();saw.printAnalysis('saw.dll?Go&ViewID=o%3aportalgo%7er%3areport&SearchID=fht9ci78n2ovq2hlu08s129o6u&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&Style=Alta&ViewState=4avjd0pbrm0uvof3170gdba0ja&viewName=compoundView%211', null, event, 'o:portalgo~r:report');return false;",
+    "class": "masterMenuItem NQWMenuItem NQWMenuItemWIconMixin"
+  },
+  {
+    "tag": "A",
+    "text": "Export",
+    "title": "Export to different format",
+    "aria": null,
+    "href": "javascript:void(null)",
+    "onclick": "return NQWPopupMenu(event,'idDownloadLinksMenuo:portalgo~r:report')",
+    "class": ""
+  },
+  {
+    "tag": "A",
+    "text": "Formatted",
+    "title": "",
+    "aria": null,
+    "href": "javascript:void(null)",
+    "onclick": "return false;",
+    "class": "masterMenuItem NQWMenuItem NQWMenuItemWIconMixin"
+  },
+  {
+    "tag": "A",
+    "text": "Data",
+    "title": "",
+    "aria": null,
+    "href": "javascript:void(null)",
+    "onclick": "return false;",
+    "class": "masterMenuItem NQWMenuItem NQWMenuItemWIconMixin"
+  },
+  {
+    "tag": "A",
+    "text": "PDF",
+    "title": "",
+    "aria": null,
+    "href": "javascript:void(null);",
+    "onclick": "NQWClearActiveMenu();Download('saw.dll?Go&ViewID=o%3aportalgo%7er%3areport&Action=Download&SearchID=fht9ci78n2ovq2hlu08s129o6u&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&Style=Alta&ViewState=4avjd0pbrm0uvof3170gdba0ja&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&path=%2fshared%2fCustom%2fSILVUS%2fSIL_RW_LMR_QTD_Revenue_v%5c%2fs_Quota&Format=pdf&Attach=1&bNotSaveCommand=true', null, 'o:portalgo~r:report', 'pdf'); return false",
+    "class": "masterMenuItem NQWMenuItem NQWMenuItemWIconMixin"
+  },
+  {
+    "tag": "A",
+    "text": "Excel",
+    "title": "",
+    "aria": null,
+    "href": "javascript:void(null);",
+    "onclick": "NQWClearActiveMenu();Download('saw.dll?Go&ViewID=o%3aportalgo%7er%3areport&Action=Download&SearchID=fht9ci78n2ovq2hlu08s129o6u&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&Style=Alta&ViewState=4avjd0pbrm0uvof3170gdba0ja&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&path=%2fshared%2fCustom%2fSILVUS%2fSIL_RW_LMR_QTD_Revenue_v%5c%2fs_Quota&Format=excel2007&Extension=.xlsx&bNotSaveCommand=true', null, 'o:portalgo~r:report', 'excel2007');",
+    "class": "masterMenuItem NQWMenuItem NQWMenuItemWIconMixin"
+  },
+  {
+    "tag": "A",
+    "text": "Powerpoint",
+    "title": "",
+    "aria": null,
+    "href": "javascript:void(null);",
+    "onclick": "NQWClearActiveMenu();return Download('saw.dll?Go&ViewID=o%3aportalgo%7er%3areport&Action=Download&SearchID=fht9ci78n2ovq2hlu08s129o6u&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&Style=Alta&ViewState=4avjd0pbrm0uvof3170gdba0ja&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&path=%2fshared%2fCustom%2fSILVUS%2fSIL_RW_LMR_QTD_Revenue_v%5c%2fs_Quota&Format=powerpoint2007&Extension=.pptx&bNotSaveCommand=true', null, 'o:portalgo~r:report', 'powerpoint2007');",
+    "class": "masterMenuItem NQWMenuItem NQWMenuItemWIconMixin"
+  },
+  {
+    "tag": "A",
+    "text": "Web Archive",
+    "title": "",
+    "aria": null,
+    "href": "javascript:void(null);",
+    "onclick": "NQWClearActiveMenu();Download('saw.dll?Go&ViewID=o%3aportalgo%7er%3areport&Action=Download&SearchID=fht9ci78n2ovq2hlu08s129o6u&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&Style=Alta&ViewState=4avjd0pbrm0uvof3170gdba0ja&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&path=%2fshared%2fCustom%2fSILVUS%2fSIL_RW_LMR_QTD_Revenue_v%5c%2fs_Quota&Format=mht&bNotSaveCommand=true', null, 'o:portalgo~r:report', 'mht'); return false",
+    "class": "masterMenuItem NQWMenuItem NQWMenuItemWIconMixin"
+  },
+  {
+    "tag": "A",
+    "text": "Excel",
+    "title": "",
+    "aria": null,
+    "href": "javascript:void(null);",
+    "onclick": "NQWClearActiveMenu();return Download('saw.dll?Go&ViewID=o%3aportalgo%7er%3areport&Action=Download&SearchID=fht9ci78n2ovq2hlu08s129o6u&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&Style=Alta&ViewState=4avjd0pbrm0uvof3170gdba0ja&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&path=%2fshared%2fCustom%2fSILVUS%2fSIL_RW_LMR_QTD_Revenue_v%5c%2fs_Quota&Format=excel_data&Extension=.xlsx&bNotSaveCommand=true', null, 'o:portalgo~r:report', 'excel_data');",
+    "class": "masterMenuItem NQWMenuItem NQWMenuItemWIconMixin"
+  },
+  {
+    "tag": "A",
+    "text": "CSV",
+    "title": "",
+    "aria": null,
+    "href": "javascript:void(null);",
+    "onclick": "NQWClearActiveMenu();return Download('saw.dll?Go&ViewID=o%3aportalgo%7er%3areport&Action=Download&SearchID=fht9ci78n2ovq2hlu08s129o6u&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&Style=Alta&ViewState=4avjd0pbrm0uvof3170gdba0ja&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&path=%2fshared%2fCustom%2fSILVUS%2fSIL_RW_LMR_QTD_Revenue_v%5c%2fs_Quota&Format=csv&Extension=.csv&bNotSaveCommand=true', null, 'o:portalgo~r:report', 'csv');",
+    "class": "masterMenuItem NQWMenuItem NQWMenuItemWIconMixin"
+  },
+  {
+    "tag": "A",
+    "text": "Tab Delimited",
+    "title": "",
+    "aria": null,
+    "href": "javascript:void(null);",
+    "onclick": "NQWClearActiveMenu();return Download('saw.dll?Go&ViewID=o%3aportalgo%7er%3areport&Action=Download&SearchID=fht9ci78n2ovq2hlu08s129o6u&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&Style=Alta&ViewState=4avjd0pbrm0uvof3170gdba0ja&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&path=%2fshared%2fCustom%2fSILVUS%2fSIL_RW_LMR_QTD_Revenue_v%5c%2fs_Quota&Format=txt&Extension=.csv&bNotSaveCommand=true', null, 'o:portalgo~r:report', 'txt');",
+    "class": "masterMenuItem NQWMenuItem NQWMenuItemWIconMixin"
+  },
+  {
+    "tag": "A",
+    "text": "XML",
+    "title": "",
+    "aria": null,
+    "href": "javascript:void(null);",
+    "onclick": "NQWClearActiveMenu();return Download('saw.dll?Go&ViewID=o%3aportalgo%7er%3areport&Action=Download&SearchID=fht9ci78n2ovq2hlu08s129o6u&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&Style=Alta&ViewState=4avjd0pbrm0uvof3170gdba0ja&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&path=%2fshared%2fCustom%2fSILVUS%2fSIL_RW_LMR_QTD_Revenue_v%5c%2fs_Quota&Format=xml&Extension=.xml&bNotSaveCommand=true', null, 'o:portalgo~r:report', 'xml');",
+    "class": "masterMenuItem NQWMenuItem NQWMenuItemWIconMixin"
+  },
+  {
+    "tag": "A",
+    "text": "Add to Briefing Book",
+    "title": "Save this content for offline viewing",
+    "aria": null,
+    "href": "javascript:void(null)",
+    "onclick": "saw.view.showAddToBriefingBookDialog(event, 'SIL_RW_LMR_QTD_Revenue_v/s_Quota', '/shared/Custom/SILVUS', 'saw.dll?Go&ViewID=o%3aportalgo%7er%3areport&Action=Print&SearchID=fht9ci78n2ovq2hlu08s129o6u&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota&Style=Alta&ViewState=4avjd0pbrm0uvof3170gdba0ja&Folder=%2fshared%2fCustom%2fSILVUS&ItemName=SIL_RW_LMR_QTD_Revenue_v%2fs_Quota');return false;",
+    "class": ""
+  },
+  {
+    "tag": "A",
+    "text": "Email",
+    "title": "Email this content",
+    "aria": null,
+    "href": "javascript:void(null)",
+    "onclick": "saw.view.showEmailDialog(event, 'SIL_RW_LMR_QTD_Revenue_v/s_Quota', '/shared/Custom/SILVUS');return false;",
+    "class": ""
+  },
+  {
+    "tag": "A",
+    "text": "Copy",
+    "title": "Copy Analysis XML to Clipboard",
+    "aria": null,
+    "href": "javascript:void(null)",
+    "onclick": "return copyToClipBoard('','compoundView!1','SIL_RW_LMR_QTD_Revenue_v/s_Quota','o:portalgo~r:report'); return false;",
+    "class": ""
+  }
+]

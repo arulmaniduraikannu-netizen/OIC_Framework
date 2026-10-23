@@ -1,0 +1,43 @@
+{
+  "name": "oic-opencode-runner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local OpenCode runner for generating Oracle OIC Playwright automation from Excel test cases.",
+  "scripts": {
+    "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "tsx watch src/server/index.ts",
+    "dev:client": "vite --host 127.0.0.1",
+    "build": "tsc -p tsconfig.server.json && vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.server.json",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@opencode-ai/sdk": "^1.18.18",
+    "@playwright/mcp": "^0.0.77",
+    "cors": "latest",
+    "express": "latest",
+    "fast-xml-parser": "^5.9.3",
+    "jszip": "^3.10.1",
+    "lucide-react": "latest",
+    "playwright": "^1.61.1",
+    "react": "latest",
+    "react-dom": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/cors": "latest",
+    "@types/express": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "concurrently": "latest",
+    "tsx": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  }
+}

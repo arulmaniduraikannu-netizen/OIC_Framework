@@ -1,0 +1,21 @@
+# Copy to an external config file and use -Dprofile=dev4 -Dconfig.file=<path>.
+# Replace all placeholders locally. Never commit credentials.
+
+browser=chromium
+headless=false
+slowMo=0
+
+baseUrl=https://ecaw-dev4.fa.ocs.oraclecloud.com/
+username=TKJF78
+password=whoareyou@123
+
+viewportWidth=1440
+viewportHeight=900
+acceptDownloads=true
+ignoreHttpsErrors=false
+javaScriptEnabled=true
+locale=en-US
+
+actionTimeout=10000
+navigationTimeout=60000
+recordVideo=false

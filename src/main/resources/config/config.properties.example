@@ -1,0 +1,21 @@
+# Copy this file to config.properties and replace every <...> value locally.
+# Never commit config.properties: it may contain credentials.
+
+browser=chromium
+headless=false
+slowMo=0
+
+baseUrl=<ORACLE_FUSION_OR_OIC_URL>
+username=<YOUR_USERNAME>
+password=<YOUR_PASSWORD>
+
+viewportWidth=1440
+viewportHeight=900
+acceptDownloads=true
+ignoreHttpsErrors=false
+javaScriptEnabled=true
+locale=en-US
+
+actionTimeout=10000
+navigationTimeout=60000
+recordVideo=false

@@ -1,0 +1,675 @@
+{
+  "title": "Implementing Incentive Compensation",
+  "url": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#5-Source-Systems%2C-Data-Formats%2C-and-Party-Usage-12",
+  "text": "Skip to Content\nSkip to Search\nHome\nHelp Center\nImplementing Incentive Compensation\nCloud/\nCloud Applications/\nIncentive Compensation\nImplementing Incentive Compensation\nTitle and Copyright Information\nGet Help\n1 About This Guide\n2 Implementation Overview\n3 Enterprise Structures for Incentive Compensation\n4 Persons for Incentive Compensation\n5 Source Systems, Data Formats, and Party Usage\nSource Systems for Incentive Compensation\nData Formats for Incentive Compensation\nParty Usage\n6 Approval Management for Incentive Compensation\n7 Help Configuration\n8 Lookups\n9 Profile Options\n10 Flexfields\n11 Currency Conversion Rates\n12 Incentive Compensation Calendars and Intervals\n13 Configuration for a Business Unit\n14 Custom Qualifiers and Lookups\n15 Enterprise Scheduler Job Definitions and Job Sets\n16 Other Common Setup and Maintenance Tasks\n17 Audit Policies\n18 External Integration\n19 Move Common Reference Objects\n20 Test Your Implementation and Purge Data\nOracle Fusion Cloud Sales Automation\n\nImplementing Incentive Compensation\n\nF77872-12\n\nPrevious Page\nNext Page\nTitle and Copyright Information\n© Oracle\nAbout Oracle\nContact Us\nProducts & Services\nTerms of Use & Privacy\nCookie Preferences\nAd Choices",
+  "links": [
+    {
+      "text": "Skip to Content",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#maincontent"
+    },
+    {
+      "text": "Skip to Search",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#skip_to_search_form"
+    },
+    {
+      "text": "Home",
+      "href": "https://docs.oracle.com/"
+    },
+    {
+      "text": "Cloud Applications",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#back"
+    },
+    {
+      "text": "Fusion Applications Suite",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/cloud/saas&id=fa-home"
+    },
+    {
+      "text": "NetSuite Applications",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/cloud/saas/netsuite&id=netsuite"
+    },
+    {
+      "text": "Industry-Specific Applications",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/industries&id=industries-docs"
+    },
+    {
+      "text": "Cloud Applications Readiness",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/cloud/saas&id=cloud-apps-readiness"
+    },
+    {
+      "text": "Cloud Infrastructure",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#back"
+    },
+    {
+      "text": "Get Started",
+      "href": "https://docs.oracle.com/en-us/iaas/Content/GSG/Concepts/baremetalintro.htm"
+    },
+    {
+      "text": "Free Tier",
+      "href": "https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier.htm"
+    },
+    {
+      "text": "Government Cloud",
+      "href": "https://docs.oracle.com/en-us/iaas/Content/General/Concepts/govlanding.htm"
+    },
+    {
+      "text": "Services",
+      "href": "https://docs.oracle.com/en-us/iaas/Content/services.htm"
+    },
+    {
+      "text": "Developer Resources",
+      "href": "https://docs.oracle.com/en-us/iaas/Content/devtoolshome.htm"
+    },
+    {
+      "text": "Security",
+      "href": "https://docs.oracle.com/en-us/iaas/Content/Security/Concepts/security.htm"
+    },
+    {
+      "text": "More Resources",
+      "href": "https://docs.oracle.com/en-us/iaas/Content/General/Reference/more.htm"
+    },
+    {
+      "text": "Launch Infrastructure Console",
+      "href": "https://console.us-phoenix-1.oraclecloud.com/"
+    },
+    {
+      "text": "All Cloud Infrastructure",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/cloud/iaas&id=oci-home"
+    },
+    {
+      "text": "On-Premises Applications",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#back"
+    },
+    {
+      "text": "Fusion Applications On Premises",
+      "href": "https://docs.oracle.com/en/applications/fusion-apps/index.html"
+    },
+    {
+      "text": "Enterprise Performance Management",
+      "href": "https://docs.oracle.com/en/applications/enterprise-performance-management/index.html"
+    },
+    {
+      "text": "E-Business",
+      "href": "https://docs.oracle.com/en/applications/e-business-suite/index.html"
+    },
+    {
+      "text": "PeopleSoft",
+      "href": "https://docs.oracle.com/en/applications/peoplesoft/index.html"
+    },
+    {
+      "text": "Siebel",
+      "href": "https://docs.oracle.com/en/applications/siebel/index.html"
+    },
+    {
+      "text": "JD Edwards",
+      "href": "https://docs.oracle.com/en/applications/jd-edwards/index.html"
+    },
+    {
+      "text": "All Applications",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/applications&id=onprem-apps-docs"
+    },
+    {
+      "text": "Middleware",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#back"
+    },
+    {
+      "text": "Business Intelligence",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=fmwlatest&id=menubi"
+    },
+    {
+      "text": "Data Integrator",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=fmwlatest&id=menudi"
+    },
+    {
+      "text": "Enterprise Manager",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=fmwlatest&id=menuem"
+    },
+    {
+      "text": "GoldenGate",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=fmwlatest&id=menugg"
+    },
+    {
+      "text": "Identity Management",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=fmwlatest&id=menuidm"
+    },
+    {
+      "text": "JavaScript Extension Toolkit",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=jetlatest&id=homepage"
+    },
+    {
+      "text": "Platform Security Services",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=fmwlatest&id=menuopss"
+    },
+    {
+      "text": "SOA Suite",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=fmwlatest&id=menusoa"
+    },
+    {
+      "text": "WebCenter",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=fmwlatest&id=menuwc"
+    },
+    {
+      "text": "WebLogic Server",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=fmwlatest&id=menuwls"
+    },
+    {
+      "text": "All Middleware",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=fmwlatest&id=menuall"
+    },
+    {
+      "text": "Database",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#back"
+    },
+    {
+      "text": "Oracle AI Database",
+      "href": "https://docs.oracle.com/en/database/oracle/oracle-database/index.html"
+    },
+    {
+      "text": "Autonomous AI Database",
+      "href": "https://docs.oracle.com/en/cloud/paas/autonomous-database/index.html"
+    },
+    {
+      "text": "Oracle APEX",
+      "href": "https://docs.oracle.com/en/database/oracle/apex/index.html"
+    },
+    {
+      "text": "Oracle GoldenGate",
+      "href": "https://docs.oracle.com/en/middleware/goldengate/index.html"
+    },
+    {
+      "text": "Oracle Essbase",
+      "href": "https://docs.oracle.com/en/database/other-databases/essbase/index.html"
+    },
+    {
+      "text": "Oracle NoSQL",
+      "href": "https://docs.oracle.com/en/database/other-databases/nosql-database/index.html"
+    },
+    {
+      "text": "Big Data",
+      "href": "https://docs.oracle.com/en/bigdata/index.html"
+    },
+    {
+      "text": "Enterprise Manager",
+      "href": "https://docs.oracle.com/en/enterprise-manager/index.html"
+    },
+    {
+      "text": "All Database Related Products",
+      "href": "https://docs.oracle.com/en/database/index.html"
+    },
+    {
+      "text": "Engineered Systems",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#back"
+    },
+    {
+      "text": "Advanced Support Gateway",
+      "href": "https://docs.oracle.com/cd/E41177_01/index.html"
+    },
+    {
+      "text": "Autonomous Health Checks and Diagnostics",
+      "href": "https://docs.oracle.com/en/engineered-systems/health-diagnostics/"
+    },
+    {
+      "text": "Big Data Appliance",
+      "href": "https://docs.oracle.com/en/bigdata/big-data-appliance/"
+    },
+    {
+      "text": "Database Appliance",
+      "href": "https://docs.oracle.com/en/engineered-systems/oracle-database-appliance/"
+    },
+    {
+      "text": "Enterprise Manager",
+      "href": "https://docs.oracle.com/en/enterprise-manager/index.html"
+    },
+    {
+      "text": "Exadata Database Machine",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/engineered-systems/exadata-database-machine&id=homepage"
+    },
+    {
+      "text": "Exalogic Elastic Cloud",
+      "href": "https://docs.oracle.com/cd/E18476_01/index.htm"
+    },
+    {
+      "text": "Exalytics In-Memory Machine",
+      "href": "https://docs.oracle.com/en/engineered-systems/index.html#OracleExalyticsIn-MemoryMachine"
+    },
+    {
+      "text": "MiniCluster",
+      "href": "https://docs.oracle.com/cd/E69469_01/index.html"
+    },
+    {
+      "text": "Private Cloud Appliance",
+      "href": "https://docs.oracle.com/en/engineered-systems/private-cloud-appliance/"
+    },
+    {
+      "text": "SuperCluster",
+      "href": "https://docs.oracle.com/en/engineered-systems/index.html#OracleSuperCluster"
+    },
+    {
+      "text": "Zero Data Loss Recovery Appliance",
+      "href": "https://docs.oracle.com/en/engineered-systems/zero-data-loss-recovery-appliance/"
+    },
+    {
+      "text": "ZFS Storage Appliance",
+      "href": "https://www.oracle.com/technetwork/documentation/oracle-unified-ss-193371.html#nas"
+    },
+    {
+      "text": "All Engineered Systems",
+      "href": "https://docs.oracle.com/en/engineered-systems/index.html"
+    },
+    {
+      "text": "Java",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#back"
+    },
+    {
+      "text": "Java EE",
+      "href": "https://docs.oracle.com/javaee/7/index.html"
+    },
+    {
+      "text": "Java Embedded",
+      "href": "https://docs.oracle.com/javame/8.3/index.html"
+    },
+    {
+      "text": "Java SE",
+      "href": "https://www.oracle.com/pls/topic/lookup?ctx=en/java/javase&id=javaselatest"
+    },
+    {
+      "text": "All Java",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/java&id=java-docs"
+    },
+    {
+      "text": "Systems",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#back"
+    },
+    {
+      "text": "Networking",
+      "href": "https://docs.oracle.com/en/networking/index.html"
+    },
+    {
+      "text": "Servers",
+      "href": "https://docs.oracle.com/en/servers/index.html"
+    },
+    {
+      "text": "Storage",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/storage&id=storage-docs"
+    },
+    {
+      "text": "All Systems",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/systems&id=systems"
+    },
+    {
+      "text": "Operating Environments",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#back"
+    },
+    {
+      "text": "Operating Systems",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/operating-systems&id=os-docs"
+    },
+    {
+      "text": "Virtualization",
+      "href": "https://docs.oracle.com/en/virtualization/"
+    },
+    {
+      "text": "All Operating Environments",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/operating-environments&id=operating-environments"
+    },
+    {
+      "text": "Virtualization",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#back"
+    },
+    {
+      "text": "Oracle Linux Virtualization Manager",
+      "href": "https://docs.oracle.com/cd/F15085_01/index.html"
+    },
+    {
+      "text": "Oracle VM",
+      "href": "https://docs.oracle.com/en/virtualization/index.html#OracleVM"
+    },
+    {
+      "text": "Oracle VM VirtualBox",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/virtualization&id=virtualbox-getstarted"
+    },
+    {
+      "text": "Secure Global Desktop",
+      "href": "https://www.oracle.com/technetwork/documentation/sgd-193668.html"
+    },
+    {
+      "text": "All Virtualization",
+      "href": "https://docs.oracle.com/en/virtualization/index.html"
+    },
+    {
+      "text": "Industry-Specific Applications",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#back"
+    },
+    {
+      "text": "Communications",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/industries&id=industries-comm-getstarted"
+    },
+    {
+      "text": "Construction and Engineering",
+      "href": "https://docs.oracle.com/en/industries/construction-engineering/index.html"
+    },
+    {
+      "text": "Digital Government",
+      "href": "https://docs.oracle.com/en/industries/digital-government/"
+    },
+    {
+      "text": "Financial Services",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/industries&id=industries-financial-services-getstarted"
+    },
+    {
+      "text": "Food and Beverage",
+      "href": "https://docs.oracle.com/en/industries/food-beverage/index.html"
+    },
+    {
+      "text": "Health",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/industries&id=industries-health-getstarted"
+    },
+    {
+      "text": "Health Sciences",
+      "href": "https://docs.oracle.com/en/industries/health-sciences/index.html"
+    },
+    {
+      "text": "Hospitality",
+      "href": "https://docs.oracle.com/en/industries/hospitality/index.html"
+    },
+    {
+      "text": "Insurance",
+      "href": "https://docs.oracle.com/en/industries/insurance/index.html"
+    },
+    {
+      "text": "Public Sector",
+      "href": "https://www.oracle.com/technetwork/documentation/pubsectrevmgmt-154608.html"
+    },
+    {
+      "text": "Retail",
+      "href": "https://docs.oracle.com/en/industries/retail/index.html"
+    },
+    {
+      "text": "State and Local",
+      "href": "https://docs.oracle.com/en/industries/state-and-local/index.html"
+    },
+    {
+      "text": "Utilities",
+      "href": "https://docs.oracle.com/en/industries/utilities/index.html"
+    },
+    {
+      "text": "All Industries",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/industries&id=industries-docs"
+    },
+    {
+      "text": "Architecture Center",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#back"
+    },
+    {
+      "text": "Reference Architectures",
+      "href": "https://docs.oracle.com/solutions/?q=&cType=reference-architectures&sort=date-desc&lang=en"
+    },
+    {
+      "text": "Solution Playbooks",
+      "href": "https://docs.oracle.com/solutions/?q=&cType=solution-playbook&sort=date-desc&lang=en"
+    },
+    {
+      "text": "Built & Deployed",
+      "href": "https://docs.oracle.com/solutions/?q=&cType=built-deployed&sort=date-desc&lang=en"
+    },
+    {
+      "text": "All Architecture Center",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/solutions&id=solutions-home"
+    },
+    {
+      "text": "Help Center",
+      "href": "https://docs.oracle.com/"
+    },
+    {
+      "text": "Account",
+      "href": "https://profile.oracle.com/myprofile/account/secure/update-account.jspx?nexturl=https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#5-Source-Systems%252C-Data-Formats%252C-and-Party-Usage-12"
+    },
+    {
+      "text": "Help",
+      "href": "https://www.oracle.com/corporate/contact/help.html"
+    },
+    {
+      "text": "Sign Out",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#"
+    },
+    {
+      "text": "Cloud",
+      "href": "https://docs.oracle.com/en/cloud/index.html"
+    },
+    {
+      "text": "Cloud Applications",
+      "href": "https://docs.oracle.com/en/cloud/saas/index.html"
+    },
+    {
+      "text": "Incentive Compensation",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/index.html"
+    },
+    {
+      "text": "Title and Copyright Information",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html"
+    },
+    {
+      "text": "Get Help",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/get-help-FA.html"
+    },
+    {
+      "text": "1 About This Guide",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#1-About-This-Guide-0"
+    },
+    {
+      "text": "2 Implementation Overview",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#2-Implementation-Overview-1"
+    },
+    {
+      "text": "3 Enterprise Structures for Incentive Compensation",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#3-Enterprise-Structures-for-Incentive-Compensation-2"
+    },
+    {
+      "text": "4 Persons for Incentive Compensation",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#4-Persons-for-Incentive-Compensation-11"
+    },
+    {
+      "text": "5 Source Systems, Data Formats, and Party Usage",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#5-Source-Systems%2C-Data-Formats%2C-and-Party-Usage-12"
+    },
+    {
+      "text": "Source Systems for Incentive Compensation",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#Source-Systems-for-Incentive-Compensation-13"
+    },
+    {
+      "text": "Data Formats for Incentive Compensation",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#Data-Formats-for-Incentive-Compensation-15"
+    },
+    {
+      "text": "Party Usage",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#Party-Usage-17"
+    },
+    {
+      "text": "6 Approval Management for Incentive Compensation",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#6-Approval-Management-for-Incentive-Compensation-19"
+    },
+    {
+      "text": "7 Help Configuration",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#7-Help-Configuration-20"
+    },
+    {
+      "text": "8 Lookups",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#8-Lookups-21"
+    },
+    {
+      "text": "9 Profile Options",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#9-Profile-Options-22"
+    },
+    {
+      "text": "10 Flexfields",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#10-Flexfields-23"
+    },
+    {
+      "text": "11 Currency Conversion Rates",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#11-Currency-Conversion-Rates-29"
+    },
+    {
+      "text": "12 Incentive Compensation Calendars and Intervals",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#12-Incentive-Compensation-Calendars-and-Intervals-30"
+    },
+    {
+      "text": "13 Configuration for a Business Unit",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#13-Configuration-for-a-Business-Unit-32"
+    },
+    {
+      "text": "14 Custom Qualifiers and Lookups",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#14-Custom-Qualifiers-and-Lookups-43"
+    },
+    {
+      "text": "15 Enterprise Scheduler Job Definitions and Job Sets",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#15-Enterprise-Scheduler-Job-Definitions-and-Job-Sets-44"
+    },
+    {
+      "text": "16 Other Common Setup and Maintenance Tasks",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#16-Other-Common-Setup-and-Maintenance-Tasks-50"
+    },
+    {
+      "text": "17 Audit Policies",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#17-Audit-Policies-54"
+    },
+    {
+      "text": "18 External Integration",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#18-External-Integration-55"
+    },
+    {
+      "text": "19 Move Common Reference Objects",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#19-Move-Common-Reference-Objects-58"
+    },
+    {
+      "text": "20 Test Your Implementation and Purge Data",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#20-Test-Your-Implementation-and-Purge-Data-59"
+    },
+    {
+      "text": "© Oracle",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en/legal&id=cpyr"
+    },
+    {
+      "text": "About Oracle",
+      "href": "https://www.oracle.com/corporate/"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.oracle.com/corporate/contact/"
+    },
+    {
+      "text": "Products & Services",
+      "href": "https://docs.oracle.com/pls/topic/lookup?ctx=en&id=a-z"
+    },
+    {
+      "text": "Terms of Use & Privacy",
+      "href": "https://www.oracle.com/legal/privacy/"
+    },
+    {
+      "text": "Cookie Preferences",
+      "href": ""
+    },
+    {
+      "text": "Ad Choices",
+      "href": "https://www.oracle.com/legal/privacy/advertising-privacy-policy.html"
+    },
+    {
+      "text": "Title and Copyright Information",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html"
+    },
+    {
+      "text": "Get Help",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/get-help-FA.html"
+    },
+    {
+      "text": "1 About This Guide",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#1-About-This-Guide-0"
+    },
+    {
+      "text": "2 Implementation Overview",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#2-Implementation-Overview-1"
+    },
+    {
+      "text": "3 Enterprise Structures for Incentive Compensation",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#3-Enterprise-Structures-for-Incentive-Compensation-2"
+    },
+    {
+      "text": "4 Persons for Incentive Compensation",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#4-Persons-for-Incentive-Compensation-11"
+    },
+    {
+      "text": "5 Source Systems, Data Formats, and Party Usage",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#5-Source-Systems%2C-Data-Formats%2C-and-Party-Usage-12"
+    },
+    {
+      "text": "Source Systems for Incentive Compensation",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#Source-Systems-for-Incentive-Compensation-13"
+    },
+    {
+      "text": "Data Formats for Incentive Compensation",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#Data-Formats-for-Incentive-Compensation-15"
+    },
+    {
+      "text": "Party Usage",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#Party-Usage-17"
+    },
+    {
+      "text": "6 Approval Management for Incentive Compensation",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#6-Approval-Management-for-Incentive-Compensation-19"
+    },
+    {
+      "text": "7 Help Configuration",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#7-Help-Configuration-20"
+    },
+    {
+      "text": "8 Lookups",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#8-Lookups-21"
+    },
+    {
+      "text": "9 Profile Options",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#9-Profile-Options-22"
+    },
+    {
+      "text": "10 Flexfields",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#10-Flexfields-23"
+    },
+    {
+      "text": "11 Currency Conversion Rates",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#11-Currency-Conversion-Rates-29"
+    },
+    {
+      "text": "12 Incentive Compensation Calendars and Intervals",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#12-Incentive-Compensation-Calendars-and-Intervals-30"
+    },
+    {
+      "text": "13 Configuration for a Business Unit",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#13-Configuration-for-a-Business-Unit-32"
+    },
+    {
+      "text": "14 Custom Qualifiers and Lookups",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#14-Custom-Qualifiers-and-Lookups-43"
+    },
+    {
+      "text": "15 Enterprise Scheduler Job Definitions and Job Sets",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#15-Enterprise-Scheduler-Job-Definitions-and-Job-Sets-44"
+    },
+    {
+      "text": "16 Other Common Setup and Maintenance Tasks",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#16-Other-Common-Setup-and-Maintenance-Tasks-50"
+    },
+    {
+      "text": "17 Audit Policies",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#17-Audit-Policies-54"
+    },
+    {
+      "text": "18 External Integration",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#18-External-Integration-55"
+    },
+    {
+      "text": "19 Move Common Reference Objects",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#19-Move-Common-Reference-Objects-58"
+    },
+    {
+      "text": "20 Test Your Implementation and Purge Data",
+      "href": "https://docs.oracle.com/en/cloud/saas/incentive-compensation/oawic/index.html#20-Test-Your-Implementation-and-Purge-Data-59"
+    }
+  ]
+}

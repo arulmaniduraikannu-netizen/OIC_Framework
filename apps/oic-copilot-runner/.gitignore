@@ -1,0 +1,12 @@
+# OIC Copilot Runner local runtime state. The app recreates these folders;
+# do not commit browser profiles, auth storage-state JSON, uploaded workbooks,
+# job logs, or compiled bundles.
+node_modules/
+data/browser-profile/
+data/auth/
+data/copilot-home/
+data/jobs/
+data/workbooks/
+data/reports/
+dist-client/
+dist-server/

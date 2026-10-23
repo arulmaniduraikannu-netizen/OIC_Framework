@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test thread-count="5" name="Test">
+  <parameter name="accountName" value="ic/incentiveCompensationTransaction/import"/>
+  <!-- <parameter name="fileName" value="UPDATE_FILE_NAME"/> -->
+
+
+    <classes>
+      <class name="com.oracle.oic.tests.FileImportExportTest"/>     
+      <class name="com.oracle.oic.tests.LoginTest"/>     
+      
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

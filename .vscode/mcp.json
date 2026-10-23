@@ -1,0 +1,21 @@
+{
+  "servers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser=chrome"
+      ]
+    },
+    "excel-mcp": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/mbeps/excel-mcp.git@3439a8540c50cd9620e2c3d538fcb799ed88b72d",
+        "excel-mcp"
+      ],
+      "tools": ["*"]
+    }
+  }
+}

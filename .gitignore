@@ -1,0 +1,39 @@
+# Local Oracle environment settings and credentials
+.env
+src/main/resources/config/config.properties
+src/test/resources/config/config-dev3.properties
+
+# Test artifacts
+test-results/
+test-output/
+playwright-report/
+target/
+tmp/
+.playwright-mcp/
+session-state/
+**/session-state/
+*.db
+*.db-shm
+*.db-wal
+*.png
+failure-screenshot-inspected.png
+oracle-signin.png
+phase2-login.png
+row8-signin.png
+signin-state.png
+signin.png
+unused.png
+
+# Local credentials and runtime configuration
+.env
+src/test/resources/config/*.properties
+
+# OIC Copilot Runner local runtime state
+apps/oic-copilot-runner/node_modules/
+apps/oic-copilot-runner/data/
+apps/oic-copilot-runner/dist-client/
+apps/oic-copilot-runner/dist-server/
+.oic-runner/
+
+# Scheduled process monitor state
+.oic-runner/monitor-alert-state.properties

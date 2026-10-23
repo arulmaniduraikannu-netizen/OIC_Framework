@@ -1,0 +1,22 @@
+{
+  "testCase": {
+    "name": "<test case name>",
+    "description": "<test case description>",
+    "Group": "<test case group>",
+    "Assignment": "<test case assignment>",
+    "tags": []
+  },
+  "testData": {
+    "<input1>": "<value>",
+    "<input2>": "<value>"
+  },
+  "expectedResults": {
+    "<assertion1>": "<expected value>",
+    "<assertion2>": true
+  },
+  "timeouts": {
+    "navigation": 30000,
+    "action": 10000,
+    "longRunning": 60000
+  }
+}

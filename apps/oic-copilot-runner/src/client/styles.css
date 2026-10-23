@@ -1,0 +1,548 @@
+:root {
+  color: #18201c;
+  background: #eef2e8;
+  font-family: "Aptos", "Segoe UI", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(244, 199, 94, 0.32), transparent 28rem),
+    linear-gradient(135deg, #f7f0df 0%, #e8efe3 48%, #dbe8e4 100%);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.shell {
+  width: min(1440px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 28px 0 48px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: start;
+  padding: 30px 0 20px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #5b6f64;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 12px;
+  font-size: clamp(2.25rem, 5vw, 5.4rem);
+  line-height: 0.98;
+  color: #17241d;
+}
+
+h2 {
+  margin-bottom: 0;
+  font-size: 1.3rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+.heroText {
+  max-width: 860px;
+  font-size: 1.05rem;
+  color: #3d4d45;
+}
+
+.iconButton,
+.primaryButton,
+.secondaryButton {
+  border: 1px solid rgba(31, 49, 40, 0.16);
+  background: #17241d;
+  color: #f7f0df;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 14px;
+}
+
+.secondaryButton {
+  background: #eaf5ef;
+  color: #17241d;
+}
+
+.iconButton {
+  width: 44px;
+  padding: 0;
+}
+
+.runExistingRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 12px 0 4px;
+}
+
+.statusLine {
+  margin: 6px 0 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #eaf5ef;
+  color: #17241d;
+  font-size: 0.9rem;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  margin: 10px 0 18px;
+}
+
+.metric,
+.panel,
+.jobCard {
+  border: 1px solid rgba(31, 49, 40, 0.12);
+  background: rgba(255, 253, 247, 0.78);
+  box-shadow: 0 16px 50px rgba(41, 55, 46, 0.08);
+  backdrop-filter: blur(14px);
+  border-radius: 8px;
+}
+
+.metric {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 12px;
+  padding: 16px;
+  min-height: 126px;
+}
+
+.metricIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: #17241d;
+  background: #f4c75e;
+}
+
+.metric p,
+.metric span {
+  color: #5b6f64;
+}
+
+.metric p {
+  margin-bottom: 4px;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.metric strong {
+  display: block;
+  font-size: 1.35rem;
+  margin-bottom: 4px;
+}
+
+.metric span {
+  display: block;
+  font-size: 0.82rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.4fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.panel {
+  padding: 18px;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.panelHeader input {
+  width: min(280px, 100%);
+  min-height: 40px;
+  border-radius: 8px;
+  border: 1px solid rgba(31, 49, 40, 0.16);
+  padding: 0 12px;
+  background: #fffdf7;
+}
+
+.workbookControls,
+.profileGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+label {
+  display: grid;
+  gap: 5px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #5b6f64;
+}
+
+select,
+.runProfile input,
+textarea {
+  width: 100%;
+  min-height: 40px;
+  border-radius: 8px;
+  border: 1px solid rgba(31, 49, 40, 0.16);
+  padding: 0 12px;
+  background: #fffdf7;
+  color: #18201c;
+}
+
+textarea {
+  min-height: 78px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.uploadButton {
+  border: 1px solid rgba(31, 49, 40, 0.16);
+  background: #eaf5ef;
+  color: #17241d;
+  border-radius: 8px;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 12px;
+  margin-top: 21px;
+}
+
+.uploadButton input {
+  display: none;
+}
+
+.caseList {
+  display: grid;
+  gap: 8px;
+  max-height: 620px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.caseItem {
+  border: 1px solid rgba(31, 49, 40, 0.1);
+  background: rgba(255, 255, 255, 0.58);
+  color: inherit;
+  text-align: left;
+  padding: 12px;
+  border-radius: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.caseItem.active {
+  border-color: #1f6f5b;
+  background: #eaf5ef;
+}
+
+.caseId {
+  font-weight: 800;
+}
+
+.caseTitle {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.caseMeta,
+.muted {
+  color: #63756b;
+  font-size: 0.87rem;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.runProfile {
+  margin: 18px 0;
+  padding: 14px;
+  border-radius: 8px;
+  background: rgba(244, 199, 94, 0.16);
+}
+
+.runProfile h4 {
+  margin-bottom: 10px;
+}
+
+.runProfileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.runProfileHeader h4 {
+  margin: 0;
+}
+
+.runProfileActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.signInRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 12px 0 4px;
+}
+
+.signInStatus {
+  font-size: 0.85rem;
+  color: #5b6f64;
+}
+
+.reportLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0b3b6f;
+  text-decoration: none;
+}
+
+.reportLink:hover {
+  text-decoration: underline;
+}
+
+.commandRow {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+  margin: 12px 0 4px;
+}
+
+.commandRow input {
+  flex: 1;
+}
+
+.analysisPanel {
+  margin-top: 18px;
+}
+
+.analysisControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.analysisQuestion {
+  max-width: 760px;
+}
+
+.analysisQuestion textarea {
+  min-height: 64px;
+}
+
+.analysisMetrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0 12px;
+}
+
+.analysisMetrics div,
+.analysisFile,
+.copilotExplanation {
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(234, 245, 239, 0.75);
+}
+
+.analysisMetrics span,
+.analysisFile span {
+  display: block;
+  color: #5b6f64;
+  font-size: 0.82rem;
+}
+
+.analysisMetrics strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 1.15rem;
+}
+
+.analysisFile {
+  display: grid;
+  gap: 3px;
+  margin-top: 8px;
+}
+
+.warningLine {
+  margin: 10px 0 0;
+  color: #7a5310;
+  font-size: 0.87rem;
+}
+
+.copilotExplanation {
+  margin-top: 12px;
+  background: rgba(244, 199, 94, 0.16);
+}
+
+.copilotExplanation h3 {
+  margin-bottom: 6px;
+}
+
+.signInBar {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 12px 0 4px;
+}
+
+.signInBar input {
+  flex: 1;
+  min-width: 180px;
+}
+
+.details div {
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(234, 245, 239, 0.75);
+}
+
+dt {
+  font-weight: 800;
+  font-size: 0.8rem;
+  color: #5b6f64;
+}
+
+dd {
+  margin: 3px 0 0;
+}
+
+.twoColumn {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+ol {
+  padding-left: 20px;
+}
+
+.jobsPanel {
+  margin-top: 18px;
+}
+
+.jobsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.jobCard {
+  padding: 14px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: #f4c75e;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.status.running {
+  background: #a7d7c5;
+}
+
+.okIcon {
+  color: #1f6f5b;
+}
+
+@media (max-width: 980px) {
+  .metricsGrid,
+  .workspace,
+  .details,
+  .twoColumn,
+  .analysisMetrics {
+    grid-template-columns: 1fr;
+  }
+
+  .panelHeader {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .panelHeader input,
+  .primaryButton,
+  .secondaryButton,
+  .workbookControls,
+  .profileGrid {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+}

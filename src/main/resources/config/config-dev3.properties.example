@@ -1,0 +1,21 @@
+# Copy to an external config file and use -Dprofile=dev3 -Dconfig.file=<path>.
+# Replace all placeholders locally. Never commit credentials.
+
+browser=chromium
+headless=false
+slowMo=0
+
+baseUrl=https://ecaw-dev3.fa.ocs.oraclecloud.com/fscmUI/faces/FuseWelcome
+username=<DEV3_USERNAME>
+password=<DEV3_PASSWORD>
+
+viewportWidth=1440
+viewportHeight=900
+acceptDownloads=true
+ignoreHttpsErrors=false
+javaScriptEnabled=true
+locale=en-US
+
+actionTimeout=10000
+navigationTimeout=60000
+recordVideo=false

@@ -1,0 +1,50 @@
+{
+  "name": "oic-copilot-runner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local Copilot SDK runner for generating Oracle OIC Playwright automation from Excel test cases.",
+  "scripts": {
+    "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "tsx watch src/server/index.ts",
+    "dev:client": "vite --host 127.0.0.1",
+    "test:analysis": "node --import tsx --test src/server/transactionAnalysis.test.ts",
+    "build": "tsc -p tsconfig.server.json && vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.server.json",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@github/copilot-sdk": "latest",
+    "@playwright/mcp": "^0.0.77",
+    "@types/multer": "^2.2.0",
+    "cors": "latest",
+    "express": "latest",
+    "fast-xml-parser": "^5.9.3",
+    "jszip": "^3.10.1",
+    "lucide-react": "latest",
+    "multer": "^2.4.0",
+    "playwright": "^1.61.1",
+    "react": "latest",
+    "react-dom": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/cors": "latest",
+    "@types/express": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "concurrently": "latest",
+    "tsx": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "koffi@3.1.5": true
+  }
+}
