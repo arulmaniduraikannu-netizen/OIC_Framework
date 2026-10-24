@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.TimeoutError;
 import com.microsoft.playwright.options.AriaRole;
 import com.oracle.oic.base.BasePage;
 import com.oracle.oic.monitor.LongRunningProcess;
@@ -35,7 +36,8 @@ import com.oracle.oic.utils.ConfigReader;
 public class ScheduledProcessesPage extends BasePage {
 
 	private static final int MAX_RESULT_SCROLL_PASSES = Integer.getInteger("oic.monitor.maxTraversalSteps", 10000);
-		private static final String RESULTS_HOST = "[id$='pt1:panel:processTreeTable']";
+		private static final String RESULTS_HOST = "[id$='pt1:panel:result']";
+		private static final String HIERARCHY_RESULTS_HOST = "[id$='pt1:panel:processTreeTable']";
 		private static final String READ_HIERARCHY = """
 				host => {
 					const normalize = text => text.replace(/\\s+/g, '').toLowerCase();
@@ -157,16 +159,38 @@ public class ScheduledProcessesPage extends BasePage {
 		return getByRole(AriaRole.RADIO, "Hierarchy", true);
 	}
 
+	private Locator flatListViewRadio() {
+		return getByRole(AriaRole.RADIO, "Flat List", true);
+	}
+
 	private Locator processResultsTable() {
-		return locator(RESULTS_HOST);
+		return locator(activeResultsHost());
+	}
+
+	private String activeResultsHost() {
+		return hierarchyViewRadio().isChecked() ? HIERARCHY_RESULTS_HOST : RESULTS_HOST;
 	}
 
 	private Locator processResultsScroller() {
 		return processResultsTable().locator("[id$='::scroller']");
 	}
 
+	private List<Locator> processResultScrollers() {
+		Locator table = processResultsTable();
+		Locator databaseScroller = table.locator("[id$='::db']");
+		Locator standardScroller = table.locator("[id$='::scroller']");
+		if (hierarchyViewRadio().isChecked()) {
+			return databaseScroller.count() > 0 ? List.of(databaseScroller) : List.of();
+		}
+		if (standardScroller.count() > 0) {
+			return databaseScroller.count() > 0
+					? List.of(standardScroller, databaseScroller) : List.of(standardScroller);
+		}
+		return databaseScroller.count() > 0 ? List.of(databaseScroller) : List.of();
+	}
+
 	private Locator noDataRow() {
-		return getByRole(AriaRole.ROW, "No data to display.", true);
+		return getByRole(processResultsTable(), AriaRole.ROW, "No data to display.", true);
 	}
 
 	private Locator processRow(String processId) {
@@ -229,12 +253,45 @@ public class ScheduledProcessesPage extends BasePage {
 		press(from, "Tab");
 		fill(to, end.format(formatter));
 		press(to, "Tab");
-		waitForVisible(hierarchyViewRadio(), ConfigReader.getActionTimeout());
-		if (!hierarchyViewRadio().isChecked()) {
-			clickForce(hierarchyViewRadio());
-		}
+		selectProcessView(hierarchyViewRadio());
+		waitForVisible(processResultsTable(), ConfigReader.getNavigationTimeout());
 		Map<String, LongRunningProcess> processes = new LinkedHashMap<>();
-		for (String rootName : rootNames.isEmpty() ? List.of("") : List.copyOf(new java.util.LinkedHashSet<>(rootNames))) {
+		List<String> roots = rootNames.isEmpty() ? List.of("")
+				: List.copyOf(new java.util.LinkedHashSet<>(rootNames));
+		Map<String, List<LongRunningProcess>> hierarchyByRoot = new LinkedHashMap<>();
+
+		selectProcessView(hierarchyViewRadio());
+		for (String rootName : roots) {
+			List<LongRunningProcess> hierarchyProcesses = searchAndCollectRootProcesses(rootName, true);
+			hierarchyByRoot.put(rootName, hierarchyProcesses);
+			hierarchyProcesses.forEach(process -> processes.put(process.processId(), process));
+		}
+
+		selectProcessView(flatListViewRadio());
+		for (String rootName : roots) {
+			List<LongRunningProcess> hierarchyProcesses = hierarchyByRoot.get(rootName);
+			List<LongRunningProcess> flatListProcesses = searchAndCollectRootProcesses(rootName, false);
+			flatListProcesses.forEach(process -> processes.putIfAbsent(process.processId(), process));
+			long flatListOnlyCount = flatListProcesses.stream()
+					.filter(process -> !hierarchyProcesses.stream()
+							.anyMatch(existing -> existing.processId().equals(process.processId())))
+					.count();
+			System.out.printf("Workbook root '%s': Hierarchy=%d, Flat List=%d, combined unique=%d%n",
+					rootName, hierarchyProcesses.size(), flatListProcesses.size(),
+					hierarchyProcesses.size() + flatListOnlyCount);
+		}
+		return List.copyOf(processes.values());
+	}
+
+	private void selectProcessView(Locator viewRadio) {
+		waitForVisible(viewRadio, ConfigReader.getActionTimeout());
+		if (!viewRadio.isChecked()) {
+			clickForce(viewRadio);
+		}
+		waitForVisible(processResultsTable(), ConfigReader.getNavigationTimeout());
+	}
+
+	private List<LongRunningProcess> searchAndCollectRootProcesses(String rootName, boolean hierarchyView) {
 			clear(processNameField());
 			if (!rootName.isEmpty()) {
 				fill(processNameField(), rootName);
@@ -243,32 +300,146 @@ public class ScheduledProcessesPage extends BasePage {
 			clear(submissionNotesField());
 			clear(submittedByField());
 			clearStatusFilter();
+			String previousResultSignature = (String) evaluateJavaScript("""
+				selector => {
+					const host = document.querySelector(selector);
+					const body = host?.querySelector("[id$='::db']");
+					return JSON.stringify({
+						text: body?.innerText || '',
+						rows: body?.querySelectorAll('tr').length || 0,
+						start: body?.querySelector('[_startrow]')?.getAttribute('_startrow') || '',
+						count: body?.querySelector('[_rowcount]')?.getAttribute('_rowcount') || '',
+						height: host?.querySelector("[id$='::scroller']")?.scrollHeight || 0
+					});
+				}
+				""", activeResultsHost());
 			evaluateJavaScript("""
-			    selector => {
-			        document.querySelector(selector).__oicSearchPending = true;
-			    }
-			    """, RESULTS_HOST);
+				selector => {
+					const host = document.querySelector(selector);
+					if (host) {
+						delete host.dataset.oicResultSignature;
+						delete host.dataset.oicResultSignatureSince;
+					}
+				}
+				""", activeResultsHost());
 			click(searchButton());
+			waitForJavaScriptCondition("""
+				selector => Boolean(document.querySelector(selector))
+				""", activeResultsHost(), ConfigReader.getNavigationTimeout());
+			waitForVisible(processResultsTable(), ConfigReader.getNavigationTimeout());
 			waitForJavaScriptCondition("""
 			    selector => {
 			        const host = document.querySelector(selector);
-			        return host && host.__oicSearchPending !== true
-			            && window.AdfPage.PAGE.isPageFullyLoaded();
+			        if (!host) return false;
+			        const normalize = text => text.replace(/\\s+/g, '').toLowerCase();
+			        const expected = ['Name', 'Metadata Name', 'Process ID', 'Status',
+			            'Scheduled Time', 'Submission Time', 'Completion Time', 'Submitted By',
+			            'Submission Notes', 'Start Time'].map(normalize);
+			        const headersTable = host.querySelector("table[id$='::ch::d2::t2']");
+			        const emptyState = host.querySelector("[id$='::emptyTxt']");
+			        if (emptyState && emptyState.textContent.trim() === 'No data to display.') return true;
+			        if (!headersTable) return false;
+			        const headers = Array.from(headersTable.querySelectorAll('th'))
+			            .map(cell => normalize(cell.innerText)).filter(text => text);
+			        return expected.every(name => headers.includes(name));
 			    }
-			    """, RESULTS_HOST, ConfigReader.getNavigationTimeout());
-			waitForVisible(processResultsTable(), ConfigReader.getNavigationTimeout());
+					""", activeResultsHost(), ConfigReader.getNavigationTimeout());
+			waitForJavaScriptCondition("""
+				argument => {
+					const host = document.querySelector(argument.selector);
+					const body = host?.querySelector("[id$='::db']");
+					if (!host || !body) return false;
+					const text = body.innerText || '';
+					const emptyState = host.querySelector("[id$='::emptyTxt']");
+					const emptyText = emptyState?.textContent?.trim() || '';
+					const hasEmptyState = emptyText === 'No data to display.';
+					const hasProcessId = /\\b\\d{7,}\\b/.test(text);
+					if (!hasEmptyState && !hasProcessId) return false;
+					const signature = JSON.stringify({
+						text,
+						emptyText,
+						rows: body.querySelectorAll('tr').length,
+						start: body.querySelector('[_startrow]')?.getAttribute('_startrow') || '',
+						count: body.querySelector('[_rowcount]')?.getAttribute('_rowcount') || '',
+						height: host.querySelector("[id$='::scroller']")?.scrollHeight || 0
+					});
+					if (signature === argument.previous) return false;
+					if (host.dataset.oicResultSignature !== signature) {
+						host.dataset.oicResultSignature = signature;
+						host.dataset.oicResultSignatureSince = String(Date.now());
+						return false;
+					}
+					return Date.now() - Number(host.dataset.oicResultSignatureSince) >= 2000;
+				}
+				""", Map.of("selector", activeResultsHost(), "previous", previousResultSignature),
+					ConfigReader.getNavigationTimeout());
 			if (noDataRow().isVisible()) {
 				System.out.println("No recent processes for workbook root: " + rootName);
-				continue;
+				return List.of();
 			}
-			ScheduledProcessHierarchy hierarchy = new ScheduledProcessHierarchy(
-					rootName.isEmpty() ? List.of() : List.of(rootName));
-						List<LongRunningProcess> selected = collectHierarchy(hierarchy);
-			System.out.printf("Workbook root '%s': %d exact-root and descendant processes%n",
-					rootName, selected.size());
-			selected.forEach(process -> processes.put(process.processId(), process));
+			return collectRootProcesses(rootName, hierarchyView);
+	}
+
+	private List<LongRunningProcess> collectRootProcesses(String rootName, boolean hierarchyView) {
+		Map<String, LongRunningProcess> roots = new LinkedHashMap<>();
+		processResultScrollers().forEach(this::scrollToTop);
+		String previousSnapshot = "";
+		int stableBottomPasses = 0;
+		for (int pass = 0; pass < MAX_RESULT_SCROLL_PASSES; pass++) {
+			Snapshot snapshot = readHierarchy();
+			String currentSnapshot = snapshot.rows().stream()
+					.map(row -> row.process().processId() + "@" + row.key())
+					.sorted().toList().toString() + snapshot.slots();
+			for (Row row : snapshot.rows()) {
+				if ((!hierarchyView || row.ancestorPath().isBlank())
+						&& (rootName.isEmpty() || rootName.equals(row.process().processName()))) {
+					roots.put(row.process().processId(), row.process());
+				}
+			}
+			boolean moved = false;
+			for (Locator scroller : processResultScrollers()) {
+				try {
+					if (!scroller.isVisible()) {
+						continue;
+					}
+					long currentTop = getScrollTop(scroller);
+					long clientHeight = getClientHeight(scroller);
+					long bottom = Math.max(0, getScrollHeight(scroller) - clientHeight);
+					if (currentTop < bottom) {
+						scrollBy(scroller, (int) Math.max(1, clientHeight / 2));
+						moved = getScrollTop(scroller) != currentTop;
+						if (moved) {
+							break;
+						}
+					}
+				} catch (TimeoutError ignored) {
+				}
+			}
+			if (!moved) {
+				stableBottomPasses = currentSnapshot.equals(previousSnapshot)
+						? stableBottomPasses + 1 : 0;
+				if (stableBottomPasses >= 1) {
+					List<LongRunningProcess> collected = List.copyOf(roots.values());
+					logCollectedProcesses(rootName, hierarchyView, collected);
+					return collected;
+				}
+			}
+			previousSnapshot = currentSnapshot;
 		}
-		return List.copyOf(processes.values());
+		throw new IllegalStateException("Root process traversal exceeded its bounded scroll budget");
+	}
+
+	private void logCollectedProcesses(String rootName, boolean hierarchyView,
+			List<LongRunningProcess> processes) {
+		String source = hierarchyView ? "Hierarchy" : "Flat List";
+		for (LongRunningProcess process : processes) {
+			System.out.printf(
+					"Process audit: source=%s, root='%s', id=%s, name='%s', status='%s', "
+							+ "submitted='%s', started='%s', completed='%s', elapsed=%s%n",
+					source, rootName, process.processId(), process.processName(), process.status(),
+					process.submissionTime(), process.startTime(), process.completionTime(),
+					process.elapsed());
+		}
 	}
 
 	private void clearStatusFilter() {
@@ -296,8 +467,7 @@ public class ScheduledProcessesPage extends BasePage {
 
 	private List<LongRunningProcess> collectHierarchy(ScheduledProcessHierarchy hierarchy) {
 		Map<String, LongRunningProcess> inspected = new LinkedHashMap<>();
-		List<Locator> scrollers = List.of(processResultsScroller(),
-				processResultsTable().locator("[id$='::db']"));
+		List<Locator> scrollers = processResultScrollers();
 		scrollers.forEach(this::scrollToTop);
 		for (int pass = 0; pass < MAX_RESULT_SCROLL_PASSES; pass++) {
 			Snapshot snapshot = readHierarchy();
@@ -318,7 +488,7 @@ public class ScheduledProcessesPage extends BasePage {
 						argument => Array.from(document.querySelector(argument.selector)
 						    .querySelectorAll('tr[_afrap]')).some(row =>
 							row.getAttribute('_afrap').split('_').includes(argument.key))
-						""", Map.of("selector", RESULTS_HOST, "key", row.key()), ConfigReader.getNavigationTimeout());
+						""", Map.of("selector", activeResultsHost(), "key", row.key()), ConfigReader.getNavigationTimeout());
 					hierarchy.expanded();
 					scrollers.forEach(this::scrollToTop);
 					expanded = true;

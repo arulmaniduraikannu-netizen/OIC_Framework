@@ -2,9 +2,12 @@ package com.oracle.oic.monitor;
 
 import java.time.Clock;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Locale;
 
 /** Snapshot of a scheduled process used by the recurring monitor. */
@@ -18,6 +21,17 @@ public record LongRunningProcess(
         String completionTime,
         Duration elapsed,
         String displayDuration) {
+
+        private static final List<DateTimeFormatter> ZONED_TIME_FORMATTERS = List.of(
+            DateTimeFormatter.ofPattern("M/d/yy h:mm a z", Locale.ENGLISH),
+            DateTimeFormatter.ofPattern("M/d/yy h:mm:ss a z", Locale.ENGLISH),
+            DateTimeFormatter.ofPattern("M/d/yyyy h:mm a z", Locale.ENGLISH),
+            DateTimeFormatter.ofPattern("M/d/yyyy h:mm:ss a z", Locale.ENGLISH));
+        private static final List<DateTimeFormatter> LOCAL_TIME_FORMATTERS = List.of(
+            DateTimeFormatter.ofPattern("M/d/yy h:mm a", Locale.ENGLISH),
+            DateTimeFormatter.ofPattern("M/d/yy h:mm:ss a", Locale.ENGLISH),
+            DateTimeFormatter.ofPattern("M/d/yyyy h:mm a", Locale.ENGLISH),
+            DateTimeFormatter.ofPattern("M/d/yyyy h:mm:ss a", Locale.ENGLISH));
 
     public LongRunningProcess(String processId, String processName, String status, String submitter,
             String submissionTime, String startTime, String completionTime, Duration elapsed) {
@@ -57,12 +71,21 @@ public record LongRunningProcess(
         if (value == null || value.isBlank()) {
             return null;
         }
-        try {
-            return ZonedDateTime.parse(value.trim(),
-                    DateTimeFormatter.ofPattern("M/d/yy h:mm a z", Locale.ENGLISH));
-        } catch (DateTimeParseException exception) {
-            return null;
+        String text = value.trim();
+        for (DateTimeFormatter formatter : ZONED_TIME_FORMATTERS) {
+            try {
+                return ZonedDateTime.parse(text, formatter);
+            } catch (DateTimeParseException ignored) {
+            }
         }
+        ZoneId fallbackZone = ZoneId.of(System.getProperty("oic.monitor.uiTimeZone", "UTC"));
+        for (DateTimeFormatter formatter : LOCAL_TIME_FORMATTERS) {
+            try {
+                return LocalDateTime.parse(text, formatter).atZone(fallbackZone);
+            } catch (DateTimeParseException ignored) {
+            }
+        }
+        return null;
     }
 
     private static String requireValue(String value, String fieldName) {

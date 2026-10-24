@@ -38,6 +38,13 @@ public final class LongRunningProcessMonitor {
                         + "; no duration alert evaluated.");
                 continue;
             }
+            if (isActive(process)
+                    && process.elapsed().compareTo(java.time.Duration.ofMinutes(
+                            AlertThresholdEvaluator.FIRST_THRESHOLD_MINUTES)) >= 0) {
+                alerts.add(new ProcessAlert(process,
+                        AlertThresholdEvaluator.highestNewThreshold(process.elapsed(), 0)));
+                continue;
+            }
             int lastDelivered = stateStore.lastDeliveredThreshold(process.processId());
             int threshold = AlertThresholdEvaluator.highestNewThreshold(process.elapsed(), lastDelivered);
             if (threshold > 0) {
@@ -55,4 +62,10 @@ public final class LongRunningProcessMonitor {
             }
         }
     }
+
+    private static boolean isActive(LongRunningProcess process) {
+        return "Running".equalsIgnoreCase(process.status())
+                || "Wait".equalsIgnoreCase(process.status());
+    }
+
 }

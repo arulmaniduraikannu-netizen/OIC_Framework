@@ -1,0 +1,26 @@
+name: Scheduled Process Monitor
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    name: Run scheduled process monitor
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run scheduled process monitor
+        shell: powershell
+        env:
+          OIC_STORAGE_STATE: C:\oic-monitor\prod-storage-state.json
+          OIC_MONITOR_STATE_PATH: C:\oic-monitor\monitor-alert-state.properties
+          OIC_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.OIC_GOOGLE_CHAT_WEBHOOK_URL }}
+        run: .\run-monitor.ps1

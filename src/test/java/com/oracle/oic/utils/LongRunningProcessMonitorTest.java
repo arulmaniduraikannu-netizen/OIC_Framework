@@ -47,7 +47,7 @@ public class LongRunningProcessMonitorTest {
             assertEquals(stateStore.lastDeliveredThreshold("7779908"), 90);
                 new LongRunningProcessMonitor(() -> List.of(process), new AlertStateStore(statePath),
                     new GoogleChatNotifier(webhookUrl, HttpClient.newHttpClient())).runOnce();
-                assertEquals(requestCount.get(), 1);
+                assertEquals(requestCount.get(), 2);
         } finally {
             server.stop(0);
             Files.deleteIfExists(statePath);

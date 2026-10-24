@@ -31,11 +31,23 @@ public class HomePage extends BasePage {
         return getByRole(AriaRole.LINK, "Expand Incentive Compensation", true);
     }
 
+    private Locator collapseIncentiveCompensationLink() {
+        return getByRole(AriaRole.LINK, "Collapse Incentive Compensation", true);
+    }
+
     private Locator creditsAndEarningsNavigatorLink() {
         return getByRole(AriaRole.LINK, "Credits and Earnings", true);
     }
     private Locator toolsGroup() {
         return getByRole(AriaRole.LINK, "Expand Tools", true);
+    }
+
+    private Locator collapseToolsGroup() {
+        return getByRole(AriaRole.LINK, "Collapse Tools", true);
+    }
+
+    private Locator navigatorShowMoreLink() {
+        return getByRole(AriaRole.LINK, "Show More", true);
     }
 
     private Locator toolsTab() {
@@ -58,12 +70,16 @@ public class HomePage extends BasePage {
         return getByRole(AriaRole.HEADING, "Manage Transactions", true);
     }
 
-    private Locator scheduledProcessesLink() {
-        return getByText("Scheduled Processes", false);
+    private Locator participantAssignmentsNavigatorLink() {
+        return getByRole(AriaRole.LINK, "Participant Assignments", true);
     }
 
-    private Locator scheduledProcessesHeading() {
-        return getByRole(AriaRole.HEADING, "Overview", true);
+    private Locator viewProcessesLink() {
+        return getByRole(AriaRole.LINK, "View Processes", true);
+    }
+
+    private Locator manageScheduledProcessesHeading() {
+        return getByRole(AriaRole.HEADING, "Manage Scheduled Processes", true);
     }
 
 private Locator fileImportAndExportLink() {
@@ -122,13 +138,26 @@ private Locator fileImportAndExportLink() {
 
     /** Opens the Scheduled Processes work area for job-set execution. */
     public void openScheduledProcesses() {
-        click(navigatorLink());
+        if (!navigatorShowMoreLink().isVisible()) {
+            click(navigatorLink());
+            waitForVisible(navigatorShowMoreLink(), ConfigReader.getActionTimeout());
+        }
 
-        waitForVisible(toolsGroup(), ConfigReader.getActionTimeout());
-        clickForce(toolsGroup());
-        waitForVisible(scheduledProcessesLink(), ConfigReader.getActionTimeout());
-        click(scheduledProcessesLink());
-        waitForVisible(scheduledProcessesHeading(), ConfigReader.getNavigationTimeout());
+        if (!collapseToolsGroup().isVisible()) {
+            waitForVisible(toolsGroup(), ConfigReader.getActionTimeout());
+            clickForce(toolsGroup());
+        }
+        if (!collapseIncentiveCompensationLink().isVisible()) {
+            waitForVisible(expandIncentiveCompensationLink(), ConfigReader.getActionTimeout());
+            clickForce(expandIncentiveCompensationLink());
+        }
+        waitForVisible(participantAssignmentsNavigatorLink(), ConfigReader.getActionTimeout());
+        click(participantAssignmentsNavigatorLink());
+        waitForVisible(tasksLink(), ConfigReader.getNavigationTimeout());
+        click(tasksLink());
+        waitForVisible(viewProcessesLink(), ConfigReader.getActionTimeout());
+        click(viewProcessesLink());
+        waitForVisible(manageScheduledProcessesHeading(), ConfigReader.getNavigationTimeout());
     }
 
     /** Opens the File Import and Export work area. */

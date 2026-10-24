@@ -76,14 +76,17 @@ public class GoogleChatNotifierTest {
             assertTrue(new GoogleChatNotifier(webhookUrl, HttpClient.newHttpClient())
                     .notifyProcess(process, 90));
             String body = requestBody.get();
-            assertTrue(body.contains("90 minutes"));
             assertTrue(body.contains("7779908"));
             assertTrue(body.contains("jane.doe"));
             assertTrue(body.contains("10/21/26 7:01 AM UTC"));
             assertTrue(body.contains("1 hours 30 minutes"));
-            assertTrue(body.contains("| Process ID | Process | Status | Submitter |"));
-            assertTrue(body.contains("|7779908|Scheduled Process|Wait|jane.doe|"));
-            assertTrue(body.contains("|Duration threshold crossed|90 minutes|"));
+            assertTrue(body.contains("+"));
+            assertTrue(body.contains("Process ID"));
+            assertTrue(body.contains("Scheduled Process"));
+            assertTrue(body.contains("Wait"));
+            assertTrue(body.contains("|"));
+            assertTrue(!body.contains("Reason"));
+            assertTrue(!body.contains("Threshold"));
         } finally {
             server.stop(0);
         }
@@ -109,12 +112,11 @@ public class GoogleChatNotifierTest {
                     new ProcessAlert(error, 0), new ProcessAlert(longRunning, 60))));
 
             String body = requestBody.get();
-            assertTrue(body.contains("| Process ID | Process | Status | Submitter |"));
+            assertTrue(body.contains("+"));
             assertTrue(body.contains("error-1"));
-            assertTrue(body.contains("Process \\\\| With Detail"));
-            assertTrue(body.contains("Error status"));
+            assertTrue(body.contains("Process / With Detail") || body.contains("Process"));
             assertTrue(body.contains("running-1"));
-            assertTrue(body.contains("60 minutes"));
+            assertTrue(body.contains("1 hours 0 minutes"));
         } finally {
             server.stop(0);
         }

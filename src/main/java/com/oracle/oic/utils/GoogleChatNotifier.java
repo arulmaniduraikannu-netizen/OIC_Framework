@@ -8,6 +8,7 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.oracle.oic.monitor.LongRunningProcess;
@@ -104,25 +105,19 @@ public final class GoogleChatNotifier {
             return false;
         }
 
-        StringBuilder message = new StringBuilder("Scheduled process alerts\n\n")
-                .append("| Process ID | Process | Status | Submitter | Submitted | Started | Completed | Duration | Reason | Threshold |\n")
-                .append("|---|---|---|---|---|---|---|---|---|---|\n");
+        List<String[]> rows = new ArrayList<>();
+        rows.add(new String[] {"Process ID", "Process", "Status", "Submitter", "Submitted",
+            "Started", "Completed", "Duration"});
         for (ProcessAlert alert : alerts) {
             LongRunningProcess process = alert.process();
-            String reason = alert.isError() ? "Error status" : "Duration threshold crossed";
-            String threshold = alert.isError() ? "Error" : alert.thresholdMinutes() + " minutes";
-            message.append('|').append(tableCell(process.processId()))
-                    .append('|').append(tableCell(process.processName()))
-                    .append('|').append(tableCell(process.status()))
-                    .append('|').append(tableCell(process.submitter()))
-                    .append('|').append(tableCell(process.submissionTime()))
-                    .append('|').append(tableCell(process.startTime()))
-                    .append('|').append(tableCell(process.completionTime()))
-                    .append('|').append(tableCell(formatDuration(process)))
-                    .append('|').append(tableCell(reason))
-                    .append('|').append(tableCell(threshold)).append("|\n");
+            rows.add(new String[] {
+                process.processId(), process.processName(), process.status(), process.submitter(),
+                process.submissionTime(), process.startTime(), process.completionTime(),
+                formatDuration(process)
+            });
         }
-        return sendMessage(message.toString(), alerts.size() + " scheduled process alerts");
+        String message = "Scheduled process alerts\n\n```\n" + formatTable(rows) + "```";
+        return sendMessage(message, alerts.size() + " scheduled process alerts");
     }
 
     public boolean notifyMonitorStatus(int processCount) {
@@ -181,8 +176,52 @@ public final class GoogleChatNotifier {
                 : hours + " hours " + remainingMinutes + " minutes";
     }
 
-    private String tableCell(String value) {
-        return value.replace("|", "\\|").replace("\r", "<br>").replace("\n", "<br>");
+    private String formatTable(List<String[]> rows) {
+        int[] widths = {10, 48, 10, 10, 22, 22, 22, 20};
+        StringBuilder table = new StringBuilder();
+        String border = buildBorder(widths);
+        table.append(border).append('\n');
+        for (int rowIndex = 0; rowIndex < rows.size(); rowIndex++) {
+            List<String[]> wrappedCells = new ArrayList<>();
+            int rowHeight = 1;
+            for (int column = 0; column < widths.length; column++) {
+                String[] lines = wrapCell(rows.get(rowIndex)[column], widths[column]);
+                wrappedCells.add(lines);
+                rowHeight = Math.max(rowHeight, lines.length);
+            }
+            for (int lineIndex = 0; lineIndex < rowHeight; lineIndex++) {
+                table.append('|');
+                for (int column = 0; column < widths.length; column++) {
+                    String line = lineIndex < wrappedCells.get(column).length
+                            ? wrappedCells.get(column)[lineIndex] : "";
+                    table.append(' ').append(padRight(line, widths[column])).append(" |");
+                }
+                table.append('\n');
+            }
+            table.append(border).append('\n');
+        }
+        return table.toString();
+    }
+
+    private String buildBorder(int[] widths) {
+        StringBuilder border = new StringBuilder("+");
+        for (int width : widths) {
+            border.append("-".repeat(width + 2)).append('+');
+        }
+        return border.toString();
+    }
+
+    private String[] wrapCell(String value, int width) {
+        String normalized = value == null ? "" : value.replace('|', '/').replace('\r', ' ').replace('\n', ' ');
+        List<String> lines = new ArrayList<>();
+        for (int start = 0; start < normalized.length(); start += width) {
+            lines.add(normalized.substring(start, Math.min(start + width, normalized.length())));
+        }
+        return lines.isEmpty() ? new String[] {""} : lines.toArray(String[]::new);
+    }
+
+    private String padRight(String value, int width) {
+        return value + " ".repeat(Math.max(0, width - value.length()));
     }
 
     private String escapeJson(String value) {
