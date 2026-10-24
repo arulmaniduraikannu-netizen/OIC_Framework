@@ -12,6 +12,8 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 $monitorArguments = @("-f", (Join-Path $PSScriptRoot "pom.xml"), "-q", "-Dtest=ScheduledProcessMonitorCycleTest")
+$headless = if ($env:GITHUB_ACTIONS -eq "true") { "true" } else { "false" }
+$monitorArguments += "-Ddefault.headless=$headless"
 if ($CollectionOnly) {
     $monitorArguments += "-Doic.monitor.collectionOnly=true"
 }
